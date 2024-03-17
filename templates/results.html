@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block head %} {% endblock %}
+
+{% block body %}
+    {% for i in range(checks|length) %}
+    {% if results[i] != 0 %}
+        <h2>{{ checks[i]['display_name'] + ' - ' + checks[i]['host'] }}</h2>
+        <div>{{ results[i] }}</div>
+        <hr class="line">
+    {% endif %}
+    {% endfor %}
+{% endblock %}

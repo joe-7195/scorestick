@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+        {% block head %} {% endblock %}
+    <title>scorestick</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="backdrop"></div>
+    <div class="sticky">
+        <div class="row">
+            <a href="{{ url_for('index') }}" class="title"> 
+                scorestick
+            </a>
+            <a href="{{ url_for('checks') }}" class="title"> 
+                checks
+            </a>
+            <a href="{{ url_for('results') }}" class="title"> 
+                results
+            </a>
+        </div>
+        <hr class="big-line">
+    </div>
+    {% block body %} {% endblock %}
+</body>
+</html>

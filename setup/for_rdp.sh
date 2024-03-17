@@ -1,0 +1,1 @@
+sudo Xvfb :69 -screen 0 100x100x16 &

@@ -1,0 +1,10 @@
+{
+  "display_name": "http",
+  "service": "http",
+  "host": "192.168.151.98",
+  "port": "80",
+  "content": {
+    "/index.php":"xampp",
+    "/path.html":"regex"
+  }
+}

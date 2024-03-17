@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".input").each(function() {
+            $(this).css('height', 'auto');
+            $(this).height(this.scrollHeight);
+        });
+    });
+ </script>
+{% endblock %}
+
+{% block body %}
+{% for i in range(checks|length) %}
+    <h2>{{ checks[i]['display_name'] + ' - ' + checks[i]['host'] }}</h2>
+    <form method="post">
+        <div class="row">
+            <textarea class="input" spellcheck="false" name="text">{{ checks[i] | tojson(indent=2) }}</textarea>
+            <button class="submit" name="check_index" value="{{ i|string }}">submit</input>
+        </div>
+    </form>
+    <hr class="line">
+{% endfor %}
+{% endblock %}

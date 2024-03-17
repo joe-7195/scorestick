@@ -1,0 +1,13 @@
+{
+  "display_name": "ftp",
+  "service": "ftp",
+  "host": "192.168.151.98",
+  "creds": {
+    "anonymous": "",
+    "kate.bush": "Password123!@#",
+    "harry.potter": "Password123!@#"
+  },
+  "content": {
+    "catboy.png": "66C2DCA3C6EE7760DCB98A3F31259D22"
+  }
+}

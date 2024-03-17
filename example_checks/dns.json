@@ -1,0 +1,9 @@
+{
+  "display_name": "dns",
+  "service": "dns",
+  "host": "198.18.0.188",
+  "content": {
+      "db01.galacticspace.local":"192.168.151.1",
+      "dc01.galacticspace.local":"198.18.0.188"
+  }
+}

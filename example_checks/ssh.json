@@ -1,0 +1,11 @@
+{
+  "display_name": "ssh",
+  "service": "ssh",
+  "host": "198.18.0.188",
+  "creds": {
+    "jack.rover": "Password123!@#",
+    "kate.bush": "Password123!@#",
+    "harry.potter": "Password123!@#"
+  },
+  "command": "whoami"
+}

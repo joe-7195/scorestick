@@ -1,0 +1,10 @@
+{
+  "display_name": "rdp",
+  "service": "rdp",
+  "host": "192.168.151.98",
+  "creds": {
+    "jack.rover": "Password123!@#",
+    "kate.bush": "Password123!@#",
+    "harry.potter": "Password123!@#"
+  }
+}
