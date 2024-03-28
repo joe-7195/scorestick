@@ -1,8 +1,8 @@
-dnspython==2.6.1
-Flask==3.0.2
-paramiko==3.4.0
-pymysql==1.1.0
-pywinrm==0.4.3
-redis==5.0.3
-Requests==2.31.0
+dnspython
+Flask
+paramiko
+pymysql
+pywinrm
+redis
+Requests
 smbprotocol
