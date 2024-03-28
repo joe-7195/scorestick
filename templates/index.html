@@ -8,6 +8,9 @@
 <div style="width:100%">
     <div class="sticky">
     <div class="row">
+        <div class="title">
+            time
+        </div>
     {% for i in range(checks|length) %}
         <div class="title"> 
         {{ checks[i]['display_name'] }} 
@@ -20,12 +23,17 @@
 
     {% for i in range(all_results|length) %}
     <div class="row">
+        <div class="check">
+            {{ timestamps[i] }}
+        </div>
     {% for j in range(all_results[i]|length) %}
         <div class="check" width="{{ (100/(checks|length))|string + '%' }}">
         {% if all_results[i][j] == 0 %}
             <div class="success">pass</div>
         {% elif all_results[i][j] == 'check error' %}
             <div class="error">err</div>
+        {% elif all_results[i][j] = 'no check' %}
+            <div class="error">&nbsp;</div>
         {% else %}
             <div class="fail">fail</div>
         {% endif %}

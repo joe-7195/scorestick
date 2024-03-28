@@ -1,11 +1,11 @@
 * {
     scrollbar-color: #aaa #444;
+    overscroll-behavior: none;
 }
 body {
     color: #aaa;
     background-color: #222; 
     font-family: "Comic Sans MS", "Comic Sans", cursive;
-    overscroll-behavior: none;
 }
 a:link, a:visited {
     text-decoration: none;

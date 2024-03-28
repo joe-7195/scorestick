@@ -5,10 +5,11 @@ import datetime
 from time import sleep
 from redis import Redis
 from threading import Thread
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for
 from multiprocessing import Process
 from subprocess import Popen
 
+# there should totally be a better way to do this
 from src.rdp_c import rdp_check
 from src.ssh_c import ssh_check
 from src.winrm_c import winrm_check
@@ -108,8 +109,12 @@ def main_loop(round_time=5, history=20, check_dir='checks/'):
         check_dir = str(r.get('check_dir').decode('utf-8'))
         checks, results = run_checks(check_dir)
         r.set('checks', json.dumps(checks))
+        timestamp = datetime.datetime.now().strftime('%I:%M')
         all_results = []
+        all_timestamps = []
         all_results.append(results)
+        all_timestamps.append(timestamp)
+
         for i in range(history):
             try:
                 all_results.append(json.loads(r.get('results' + str(i))))
@@ -117,9 +122,21 @@ def main_loop(round_time=5, history=20, check_dir='checks/'):
                 break
         for i in range(history):
             try:
+                all_timestamps.append(json.loads(r.get('timestamp' + str(i))))
+            except TypeError:
+                break
+        
+        for i in range(history):
+            try:
                 r.set('results' + str(i), json.dumps(all_results[i]))
             except IndexError:
                 break
+        for i in range(history):
+            try:
+                r.set('timestamps' + str(i), json.dumps(all_timestamps[i]))
+            except IndexError:
+                break
+
         sleep(round_time)
 
 ############################################################## flask
@@ -131,6 +148,7 @@ app.secret_key = 'https://www.ietf.org/rfc/rfc1035.txt'
 @app.route('/')
 def index():
     all_results = []
+    all_timestamps = []
     round_history = int(r.get('round_history'))
     round_time = int(r.get('round_time'))
     for i in range(round_history):
@@ -138,11 +156,22 @@ def index():
             all_results.append(json.loads(r.get('results' + str(i))))
         except TypeError:
             break
+    for i in range(round_history):
+        try:
+            all_timestamps.append(json.loads(r.get('timestamps' + str(i))))
+        except TypeError:
+            break
     try:
         checks = json.loads(r.get('checks'))
     except TypeError:
         checks = [{'display_name' : 'loading...'}]
-    return render_template('index.html', all_results=all_results, checks=checks, round_time=round_time)
+    return render_template(
+        'index.html', 
+        all_results=all_results, 
+        checks=checks, 
+        round_time=round_time, 
+        timestamps=all_timestamps
+    )
 
 @app.route('/results/')
 def results():
@@ -184,7 +213,6 @@ def check_change():
         return redirect(url_for('checks'))
     
     except:
-        flash('some kinda error idk')
         return redirect(url_for('checks'))
 
 ##############################################################
